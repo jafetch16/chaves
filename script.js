@@ -64,6 +64,20 @@ function animar() {
 }
 animar();
 
+// Slideshow de fotos: una a la vez, cambia cada 10 segundos
+const fotos = document.querySelectorAll('.galeria .foto');
+let indiceActual = 0;
+
+function mostrarSiguienteFoto() {
+  fotos[indiceActual].classList.remove('activa');
+  indiceActual = (indiceActual + 1) % fotos.length;
+  fotos[indiceActual].classList.add('activa');
+}
+
+if (fotos.length > 0) {
+  setInterval(mostrarSiguienteFoto, 10000);
+}
+
 // Control de música
 const audio = document.getElementById('audio');
 const btnMusica = document.getElementById('btn-musica');
