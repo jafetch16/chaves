@@ -75,6 +75,7 @@ animar();
 // Slideshow de fotos: una a la vez, cambia cada 10 segundos
 const fotos = document.querySelectorAll('.galeria .foto');
 let indiceActual = 0;
+let intervaloSlideshow = null;
 
 function mostrarSiguienteFoto() {
   fotos[indiceActual].classList.remove('activa');
@@ -82,8 +83,14 @@ function mostrarSiguienteFoto() {
   fotos[indiceActual].classList.add('activa');
 }
 
-if (fotos.length > 0) {
-  setInterval(mostrarSiguienteFoto, 10000);
+function iniciarSlideshow() {
+  if (intervaloSlideshow || fotos.length === 0) return;
+  intervaloSlideshow = setInterval(mostrarSiguienteFoto, 10000);
+}
+
+function detenerSlideshow() {
+  clearInterval(intervaloSlideshow);
+  intervaloSlideshow = null;
 }
 
 // Control de música
@@ -94,8 +101,10 @@ btnMusica.addEventListener('click', () => {
   if (audio.paused) {
     audio.play();
     btnMusica.textContent = '⏸ Pausar música';
+    iniciarSlideshow();
   } else {
     audio.pause();
     btnMusica.textContent = '▶ Reproducir música';
+    detenerSlideshow();
   }
 });
