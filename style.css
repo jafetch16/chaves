@@ -18,8 +18,31 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
+
+.fondo-rosas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rosa {
+  position: absolute;
+  opacity: 0.35;
+}
+
+.rosa-1 { width: 140px; top: -30px; left: -30px; }
+.rosa-2 { width: 110px; top: 10%; right: -25px; transform: rotate(15deg); }
+.rosa-3 { width: 160px; bottom: -40px; left: 5%; transform: rotate(-10deg); }
+.rosa-4 { width: 120px; bottom: 5%; right: 8%; transform: rotate(20deg); }
+.rosa-5 { width: 90px; top: 45%; left: -20px; transform: rotate(-15deg); }
+.rosa-6 { width: 100px; top: 60%; right: -15px; transform: rotate(10deg); }
 
 .contenedor {
   position: relative;

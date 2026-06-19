@@ -9,7 +9,12 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-const colores = ['#ff8fb3', '#ffb6d9', '#ff6f9c', '#ffd1e6'];
+const paresDegradado = [
+  ['#ff8fb3', '#ffe4f0'],
+  ['#ff6f9c', '#ffd1e6'],
+  ['#ffb6d9', '#fff0f6'],
+  ['#d6336c', '#ff8fb3'],
+];
 
 class Corazon {
   constructor() {
@@ -22,7 +27,7 @@ class Corazon {
     this.speed = 0.6 + Math.random() * 1.6;
     this.sway = Math.random() * 2 - 1;
     this.angle = Math.random() * Math.PI * 2;
-    this.color = colores[Math.floor(Math.random() * colores.length)];
+    this.degradado = paresDegradado[Math.floor(Math.random() * paresDegradado.length)];
     this.opacity = 0.4 + Math.random() * 0.5;
   }
   dibujar() {
@@ -30,8 +35,11 @@ class Corazon {
     ctx.globalAlpha = this.opacity;
     ctx.translate(this.x, this.y);
     ctx.rotate(Math.sin(this.angle) * 0.3);
-    ctx.fillStyle = this.color;
     const s = this.size;
+    const gradiente = ctx.createLinearGradient(0, 0, 0, s);
+    gradiente.addColorStop(0, this.degradado[0]);
+    gradiente.addColorStop(1, this.degradado[1]);
+    ctx.fillStyle = gradiente;
     ctx.beginPath();
     ctx.moveTo(0, s / 4);
     ctx.bezierCurveTo(0, 0, -s / 2, 0, -s / 2, s / 4);
